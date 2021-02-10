@@ -78,9 +78,13 @@ Primero creo un directorio dentro de ftp para el usuario que va a acceder.
 
 ``` mkdir /srv/ftp/cristian ```
 
+Le doy permisos.
+
+``` chmod -R 777 /srv/ftp/cristian ```
+
 Luego creo el usuario pertenciendo al grupo ftp que se crea con la instalación.
 
-``` useradd -g ftp -d /srv/ftp/cristian -c cristian cristian ```
+``` useradd -g ftp -d /home/cristian/ftp -c cristian cristian ```
 
 * -g ftp : grupo al que pertenece.
 * -d /srv/ftp/cristian : directorio.
@@ -97,7 +101,7 @@ Copio la línea del usuario creado en ``` /etc/passwd ```
 
 En mi caso queda así.
 
-``` cristian:x:1001:126:cristian:/srv/ftp/cristian:/bin/sh ```
+``` cristian:x:1001:126:cristian:/home/cristian/ftp:/bin/sh ```
 
 Luego en el archivo ``` /etc/vsftpd.conf ``` tenemos que habilitar la línea de:
 
@@ -111,9 +115,39 @@ Luego pegamos la línea del usuario en el archivo ``` /etc/vsftpd.chroot_list ``
 
 Y reiniciamos el servicio.
 
-Para comprobar que funciona, creo un archivo llamado hola en el directorio ``` /srv/ftp/cristian ```
+Para comprobar que funciona, creo un archivo llamado hola en el directorio ``` /home/cristian/ftp ```
 
 Y accedo al servidor FTP por navegador, ``` ftp://192.168.0.55 ``` y me sale lo siguiente:
 
-**Añadir imagen 3**
+**Añadir imagen 3**+
+
+O por consola:
+
+**Añadir imagen 4**
+
+# Acceso al servidor FTP: anónimo tiene solo permiso de lectura en su directorio de trabajo
+
+Primero creo un directorio dentro de ``` /srv/ftp ``` llamado pub.
+
+``` mkdir /srv/ftp/pub ```
+
+Editamos el fichero ``` /etc/vsftpd.conf ```.
+
+Cambiamos el valor de ``` anonymous_enable=NO ``` a ``` YES ```.
+
+También podemos indicar que no necesiten contraseña para acceder con la siguiente directiva:
+
+``` no_anon_password=YES ```
+
+Compruebo que puedo conectarme.
+
+**Añadir imagen 5**
+
+Para hacer que los usuarios anónimos tengan solo permiso de lectura, debemos poner la siguiente directiva en el archivo de configuración.
+
+``` anon_world_readable_only=YES ```
+
+Por lo que, por ejemplo si queremos crear un directorio como anonymous, no tendremos permiso.
+
+**Añadir imagen 6**
 
