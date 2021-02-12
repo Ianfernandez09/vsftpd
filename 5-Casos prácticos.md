@@ -18,55 +18,55 @@ Vsftpd usa 2 ficheros de configuración y son:
 
 * /etc/vsftpd.conf -> Fichero de configuración del servidor vsftpd.
 
-Para que se ejecute vsftpd en modo independiente.
+* Para que se ejecute vsftpd en modo independiente.
 
 ``` listen=YES ```
 
-No permitimos que se conecten usuarios anónimos.
+* No permitimos que se conecten usuarios anónimos.
 
 ``` anonymous_enable=NO ```
 
-Permitimos que los usuario locales se puedan conectar.
+* Permitimos que los usuario locales se puedan conectar.
 
 ``` local_enable=YES ```
 
-Permitimos poder hacer modificaciones.
+* Permitimos poder hacer modificaciones.
 
 ``` write_enable=YES ```
 
-Registra las conexiones y la información de transferencia, por defecto en /var/log/vsftpd.log
+* Registra las conexiones y la información de transferencia, por defecto en /var/log/vsftpd.log
 
 ``` xferlog_enable=YES ```
 
-Se permite que el servidor vsftpd abra el puerto 20, para ponerse a la escucha de peticiones.
+* Se permite que el servidor vsftpd abra el puerto 20, para ponerse a la escucha de peticiones.
 
 ``` connect_from_port_20=YES ```
 
-Mensaje de bienvenida al conectarse mediante un cliente ftp
+* Mensaje de bienvenida al conectarse mediante un cliente ftp
 
 ``` ftpd_banner=Bienvenidos al ftp de Redes de Area Local. ```
 
-Permitimos a los usuarios locales que puedan salir de su directorio.
+* Permitimos a los usuarios locales que puedan salir de su directorio.
 
 ``` chroot_local_user=NO ```
 
-Los usuarios locales que se encuentren en el fichero indicado por chroot_list_file estarán enjaulados en su directorio.
+* Los usuarios locales que se encuentren en el fichero indicado por chroot_list_file estarán enjaulados en su directorio.
 
 ``` chroot_list_enable=YES ```
 
-Especifica el fichero que contiene los usuarios a enjaular.
+* Especifica el fichero que contiene los usuarios a enjaular.
 
 ``` chroot_list_file=/etc/vsftpd.chroot_list ```
 
-Esta opcion especifica el nombre de un directorio vacio. El directorio no tiene que tener privilegios para el usuario de ftp.Es un directorio usado como una jaula segura chroot.
+* Esta opcion especifica el nombre de un directorio vacio. El directorio no tiene que tener privilegios para el usuario de ftp.Es un directorio usado como una jaula segura chroot.
 
 ``` secure_chroot_dir=/var/run/vsftpd ```
 
-Localización del certificado RSA para usar conexiones SSL. Esta opción viene por defecto.
+* Localización del certificado RSA para usar conexiones SSL. Esta opción viene por defecto.
 
 ``` rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem ```
 
-Esta opción especifica la localización de la clave privada para las conexiones SSL.
+* Esta opción especifica la localización de la clave privada para las conexiones SSL.
 
 ``` rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key ```
 
