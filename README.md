@@ -10,4 +10,4 @@
 
 ## 5.- [Casos prácticos](https://github.com/Ianfernandez09/vsftpd/blob/main/5-Casos%20prácticos.md)
 
-## 6.- [Referencias]()
+## 6.- [Referencias](https://github.com/Ianfernandez09/vsftpd/blob/main/6.-Referencias.md)
