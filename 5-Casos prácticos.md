@@ -2,11 +2,11 @@
 
 # Versión de Vsftpd Instalado
 
-**Añadir imagen 1**
+![1](https://i.imgur.com/EmfMnWt.png)
 
 # Usuarios creados en la instalación
 
-**Añadir imagen 2**
+![2](https://i.imgur.com/PB0p75w.png)
 
 # Servicio asociado
 
@@ -118,7 +118,7 @@ Para comprobar que funciona, creo un archivo llamado hola en el directorio ``` /
 
 Y accedo al servidor FTP por FileZilla:
 
-**Añadir imagen 3**
+![3](https://i.imgur.com/x3wAuMu.png)
 
 # Acceso al servidor FTP: anónimo tiene solo permiso de lectura en su directorio de trabajo
 
@@ -132,7 +132,7 @@ También podemos indicar que no necesiten contraseña para acceder con la siguie
 
 Creo 2 archivos en el directorio.
 
-**Añadir imagen 4**
+![4](https://i.imgur.com/NaN04mC.png)
 
 Reinicio el servicio de vsftp
 
@@ -140,29 +140,29 @@ Reinicio el servicio de vsftp
 
 Nos conectamos y nos deja descargar archivos:
 
-**Añadir imagen 5**
+![5](https://i.imgur.com/cI4htNS.png)
 
 Pero no deja subir:
 
-**Añadir imagen 6**
+![6](https://i.imgur.com/fS8FmUg.png)
 
 # Acceso al servidor FTP: anónimo tiene permiso de escritura en el directorio sugerencias, que es un subdirectorio de su directorio raíz.
 
 Primero, le damos permisos al usuario ftp al directorio ftp.
 
-**Añadir imagen 7**
+![7](https://i.imgur.com/yu8qfuM.png)
 
 Creamos un directorio dentro de ftp llamado sugerencias.
 
-**Añadir imagen 8**
+![8](https://i.imgur.com/RkSDsQ4.png)
 
 Le damos permisos al usuario ftp sobre el directorio que hemos creado.
 
-**Añadir imagen 9**
+![9](https://i.imgur.com/ZDIIHqc.png)
 
 Y le quitamos los permisos de escritura sobre ftp.
 
-**Añadir imagen 10**
+![10](https://i.imgur.com/SJGaruZ.png)
 
 Activamos las siguientes directivas:
 
@@ -180,15 +180,15 @@ Reiniciamos el servicio.
 
 Nos deja subir archivos:
 
-**Añadir imagen 11**
+![11](https://i.imgur.com/O51YiDt.png)
 
 Pero no bajar:
 
-**Añadir imagen 12**
+![12](https://i.imgur.com/LtQLGSR.png)
 
 En / tampoco nos deja subir nada:
 
-**Añadir imagen 13**
+![13](https://i.imgur.com/jEV4cW4.png)
 
 # Acceso al servidor FTP: Creación de usuarios virtuales
 
@@ -198,15 +198,15 @@ Primero instalamos el siguiente paquete.
 
 Luego hacemos que el archivo de configuración quede de la siguiente forma:
 
-**Añadir imagen 14**
+![14](https://i.imgur.com/HNI7Szd.png)
 
 Y dentro de una carpeta, creamos el archivo ftpd.passwd de la siguiente manera.
 
-**Añadir imagen 15**
+![15](https://i.imgur.com/AaVSddH.png)
 
 Me dirijo a /etc/pam.d y configuro el siguiente archivo. Solo dejamos esas líneas.
 
-**Añadir imagen 16**
+![16](https://i.imgur.com/qNSWXsH.png)
 
 Creo el usuario virtual de la siguiente manera:
 
@@ -214,7 +214,7 @@ Creo el usuario virtual de la siguiente manera:
 
 Creo el directorio y entro.
 
-**Añadir imagen 17**
+![17](https://i.imgur.com/gloNKQW.png)
 
 Creo el archivo para user1 y dentro escribo lo siguiente.
 
@@ -222,7 +222,7 @@ Creo el archivo para user1 y dentro escribo lo siguiente.
 
 Creo la ruta donde podrá acceder el usuario.
 
-**Añadir imagen 18**
+![18](https://i.imgur.com/c9M879u.png)
 
 Reinicio el servicio de vsftpd e intento acceder desde FileZilla.
 
@@ -234,7 +234,7 @@ Primero instalo openssl para generar los certificados y claves.
 
 Generamos el certificado.
 
-**Añadir imagen 19**
+![19](https://i.imgur.com/nnHJ5bn.png)
 
 Configuramos las siguientes líneas del archivo /etc/vsftpd.conf:
 
@@ -246,4 +246,4 @@ Reiniciamos el servicio.
 
 Al intentar conectar desde FileZilla, nos sale el siguiente mensaje.
 
-**Añadir imagen 20**
+![20](https://i.imgur.com/dJ5yLlo.png)
