@@ -71,23 +71,18 @@ Vsftpd usa 2 ficheros de configuración y son:
 ``` rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key ```
 
 # Acceso al servidor FTP: usuarios del sistema
+Creamos los directorios:
 
-## Creo el usuario
+```mkdir /home/cristian ```
 
-Primero creo un directorio dentro de ftp para el usuario que va a acceder.
+```mkdir /home/cristian/ftp```
 
-``` mkdir /srv/ftp/cristian ```
-
-Le doy permisos.
-
-``` chmod -R 777 /srv/ftp/cristian ```
-
-Luego creo el usuario pertenciendo al grupo ftp que se crea con la instalación.
+Creo el usuario pertenciendo al grupo ftp que se crea con la instalación.
 
 ``` useradd -g ftp -d /home/cristian/ftp -c cristian cristian ```
 
 * -g ftp : grupo al que pertenece.
-* -d /srv/ftp/cristian : directorio.
+* -d /home/cristian/ftp : directorio.
 * -c cristian: el nombre completo del usuario.
 * cristian: nombre de usuario.
 
@@ -105,6 +100,10 @@ En mi caso queda así.
 
 Luego en el archivo ``` /etc/vsftpd.conf ``` tenemos que habilitar la línea de:
 
+```LISTEN=YES```
+
+```LISTEN_ipv6=NO```
+
 ``` chroot_local_user=YES ```
 
 ``` chroot_list_enable=YES ```
@@ -117,19 +116,11 @@ Y reiniciamos el servicio.
 
 Para comprobar que funciona, creo un archivo llamado hola en el directorio ``` /home/cristian/ftp ```
 
-Y accedo al servidor FTP por navegador, ``` ftp://192.168.0.55 ``` y me sale lo siguiente:
+Y accedo al servidor FTP por FileZilla:
 
-**Añadir imagen 3**+
-
-O por consola:
-
-**Añadir imagen 4**
+**Añadir imagen 3**
 
 # Acceso al servidor FTP: anónimo tiene solo permiso de lectura en su directorio de trabajo
-
-Primero creo un directorio dentro de ``` /srv/ftp ``` llamado pub.
-
-``` mkdir /srv/ftp/pub ```
 
 Editamos el fichero ``` /etc/vsftpd.conf ```.
 
@@ -139,15 +130,120 @@ También podemos indicar que no necesiten contraseña para acceder con la siguie
 
 ``` no_anon_password=YES ```
 
-Compruebo que puedo conectarme.
+Creo 2 archivos en el directorio.
+
+**Añadir imagen 4**
+
+Reinicio el servicio de vsftp
+
+``` systemctl restart vsftpd.service ```
+
+Nos conectamos y nos deja descargar archivos:
 
 **Añadir imagen 5**
 
-Para hacer que los usuarios anónimos tengan solo permiso de lectura, debemos poner la siguiente directiva en el archivo de configuración.
-
-``` anon_world_readable_only=YES ```
-
-Por lo que, por ejemplo si queremos crear un directorio como anonymous, no tendremos permiso.
+Pero no deja subir:
 
 **Añadir imagen 6**
 
+# Acceso al servidor FTP: anónimo tiene permiso de escritura en el directorio sugerencias, que es un subdirectorio de su directorio raíz.
+
+Primero, le damos permisos al usuario ftp al directorio ftp.
+
+**Añadir imagen 7**
+
+Creamos un directorio dentro de ftp llamado sugerencias.
+
+**Añadir imagen 8**
+
+Le damos permisos al usuario ftp sobre el directorio que hemos creado.
+
+**Añadir imagen 9**
+
+Y le quitamos los permisos de escritura sobre ftp.
+
+**Añadir imagen 10**
+
+Activamos las siguientes directivas:
+
+``` anon_other_write_enable=YES ``` 
+
+```write_enable=YES ```
+
+```anon_upload_enable=YES ```
+
+```chroot_list_enable=NO ```
+
+Reiniciamos el servicio.
+
+```systemctl restart vsftpd.service```
+
+Nos deja subir archivos:
+
+**Añadir imagen 11**
+
+Pero no bajar:
+
+**Añadir imagen 12**
+
+En / tampoco nos deja subir nada:
+
+**Añadir imagen 13**
+
+# Acceso al servidor FTP: Creación de usuarios virtuales
+
+Primero instalamos el siguiente paquete.
+
+``` apt install libpam-pwdfile ```
+
+Luego hacemos que el archivo de configuración quede de la siguiente forma:
+
+**Añadir imagen 14**
+
+Y dentro de una carpeta, creamos el archivo ftpd.passwd de la siguiente manera.
+
+**Añadir imagen 15**
+
+Me dirijo a /etc/pam.d y configuro el siguiente archivo. Solo dejamos esas líneas.
+
+**Añadir imagen 16**
+
+Creo el usuario virtual de la siguiente manera:
+
+``` useradd --home /home/vsftpd --gid nogroup -m --shell /bin/false vsftpd ```
+
+Creo el directorio y entro.
+
+**Añadir imagen 17**
+
+Creo el archivo para user1 y dentro escribo lo siguiente.
+
+``` local_root=/srv/ftp/user1 ```
+
+Creo la ruta donde podrá acceder el usuario.
+
+**Añadir imagen 18**
+
+Reinicio el servicio de vsftpd e intento acceder desde FileZilla.
+
+# Acceso seguro a FTP
+
+Primero instalo openssl para generar los certificados y claves.
+
+``` apt install openssl ```
+
+Generamos el certificado.
+
+**Añadir imagen 19**
+
+Configuramos las siguientes líneas del archivo /etc/vsftpd.conf:
+
+```    rsa_cert_file=/etc/ssl/private/vsftpd.pem ```
+```    rsa_private_key_file=/etc/ssl/private/vsftpd.pem ```
+```    ssl_enable=yes ```
+
+Reiniciamos el servicio.
+
+Al intentar conectar desde FileZilla, nos sale el siguiente mensaje.
+
+**Añadir imagen 20**
