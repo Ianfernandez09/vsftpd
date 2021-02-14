@@ -247,3 +247,10 @@ Reiniciamos el servicio.
 Al intentar conectar desde FileZilla, nos sale el siguiente mensaje.
 
 ![20](https://i.imgur.com/dJ5yLlo.png)
+
+## Extra
+
+Para permitir la conexion por acceso seguro de los usuarios anonymous añadir la siguiente línea 
+al archivo de configuración de vsftpd.
+
+``` allow_anon_ssl=YES ```
