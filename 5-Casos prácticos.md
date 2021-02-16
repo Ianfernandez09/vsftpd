@@ -206,7 +206,7 @@ Y dentro de una carpeta, creamos el archivo ftpd.passwd de la siguiente manera.
 
 Me dirijo a /etc/pam.d y configuro el siguiente archivo. Solo dejamos esas líneas.
 
-En la primera línea sustituir required por sufficient
+En la primera línea sustituir required por sufficient. Añadir la línea ```auth    required    pam_shells.so```
 
 ![16](https://i.imgur.com/qNSWXsH.png)
 
