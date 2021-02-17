@@ -223,6 +223,10 @@ Creo el archivo para user1 y dentro escribo lo siguiente.
 
 ``` local_root=/srv/ftp/user1 ```
 
+También tendremos que añadir un archivo con el nombre del usuario local, en mi caso ``` cristian ``` y dentro escribimos lo siguiente:
+
+``` local_root=/home/cristian/ftp ```
+
 Creo la ruta donde podrá acceder el usuario.
 
 ![18](https://i.imgur.com/c9M879u.png)
